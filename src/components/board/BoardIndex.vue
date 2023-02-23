@@ -17,6 +17,7 @@
           :key="`cell-${coord.x}-${coord.y}`"
           :coord="coord"
           :piece="type"
+          @grab="handleCellGrab"
         ></AppCell>
       </g>
     </svg>
@@ -26,11 +27,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import BoardDots from '@/components/board/BoardDots.vue'
 import AppCell from '@/components/board/AppCell.vue'
-import { ref, reactive, computed } from 'vue'
+import { ref, onMounted, defineEmits } from 'vue'
 
+const emit = defineEmits(['grab', 'touch', 'menu'])
 // const cells = reactive([1, 2, 3])
 const cells = [
   {
@@ -58,7 +60,28 @@ const cells = [
 
 const totalWidth = ref(832)
 const totalHeight = ref(640)
-const uid = 0
+const uid = ref(0)
+
+const boardScaler = ref(null)
+
+const getInteraction = (clientX, clientY) => {
+  const rect = boardScaler.value?.getBoundingClientRect()
+  console.log(rect)
+  if (rect == null) throw new Error('Missing board rect on interaction')
+  const x = ((clientX - rect.x) / rect.width) * 13
+  const y = ((clientY - rect.y) / rect.height) * 10
+  const coord = {
+    x: Math.floor(x),
+    y: Math.floor(y)
+  }
+  return { coord, interactPoint: { x, y } }
+}
+
+const handleCellGrab = (clientPos) => {
+  const interaction = getInteraction(clientPos.x, clientPos.y)
+  console.log(interaction)
+  emit('grab', interaction)
+}
 
 </script>
 

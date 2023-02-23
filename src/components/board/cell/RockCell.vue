@@ -44,7 +44,7 @@
       />
       <g class="eyelids">
         <mask
-          :id="`eyelid-mask-${uid}`"
+          :id="`eyelid-mask-0`"
           width="34"
           height="15"
           x="12"
@@ -54,7 +54,7 @@
         >
           <path fill="#fff" d="M12.629 14.985h32.475v13.781H12.63V14.985z" class="eyelid-mask" />
         </mask>
-        <g :mask="`url(#eyelid-mask-${uid})`">
+        <g :mask="`url(#eyelid-mask-0)`">
           <path
             fill="#615777"
             d="M26.21 29.352c0 3.725-3.04 6.744-6.791 6.744-3.75 0-6.79-3.019-6.79-6.743 0-3.725 3.04-6.745 6.79-6.745s6.79 3.02 6.79 6.744zm18.894 0c0 3.725-3.04 6.744-6.79 6.744s-6.79-3.019-6.79-6.743c0-3.725 3.04-6.745 6.79-6.745s6.79 3.02 6.79 6.744z"
@@ -74,11 +74,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { props } from './Piece'
 export default defineComponent({ props })
-let uid = 0
-uid++
 </script>
 
 <style lang="scss" scoped>

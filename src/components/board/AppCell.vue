@@ -12,7 +12,7 @@
 <!--    <rect :width="tileSize" :height="tileSize" :class="rectClass" :style="rectStyle" />-->
 
     <!-- ELEMENT SVG -->
-    <component :is="cellComponent" v-if="cellComponent != null" :state="pieceState" />
+    <component :is="cellComponent" v-if="cellComponent != null" />
   </g>
 </template>
 
